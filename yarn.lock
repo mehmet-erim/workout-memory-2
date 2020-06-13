@@ -863,6 +863,29 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
+"@ionic/core@^4.0.0":
+  version "4.11.10"
+  resolved "https://registry.yarnpkg.com/@ionic/core/-/core-4.11.10.tgz#1aa5f2e31b8d0c741471af9c272964c34155ab5a"
+  integrity sha512-PeonKl5E+VOTBeKDr83y0N/1wbfkZ5jV3PSJTsVPE3Q15LxGEO0GzBvVMgkmkssuqOI3WJPXxYWZVL8ejzSFOQ==
+  dependencies:
+    ionicons "^4.6.3"
+    tslib "^1.10.0"
+
+"@ionic/core@^5.2.1":
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/@ionic/core/-/core-5.2.1.tgz#d3d5850b27ac2364b9ad92d25e74285554c008c6"
+  integrity sha512-jgNTAAMDXgPOi+1PBVh02rXeyC9loTSii4YETqc79y8u+gIcR094q2ragQf1rbhVa5dkTZaXmnhdRVVYbzaILA==
+  dependencies:
+    ionicons "^5.0.1"
+    tslib "^1.10.0"
+
+"@ionic/vue@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@ionic/vue/-/vue-0.0.4.tgz#9a4c90eab26cf82746f81f612a32688f6a5f6094"
+  integrity sha512-SlLb9nhFcsUQ2u0cfZJBTEICp6bUghEGY2w/iP0RLnXjkdK5ht5Cu4pJrT4FIzrEpZ5rlf50x244pT3xV+yZJg==
+  dependencies:
+    "@ionic/core" "^4.0.0"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -4330,6 +4353,16 @@ invariant@^2.2.2, invariant@^2.2.4:
   dependencies:
     loose-envify "^1.0.0"
 
+ionicons@^4.6.3:
+  version "4.6.3"
+  resolved "https://registry.yarnpkg.com/ionicons/-/ionicons-4.6.3.tgz#e4f3a3e9b66761eb8c0db27798cc1a8ce97777d2"
+  integrity sha512-cgP+VIr2cTJpMfFyVHTerq6n2jeoiGboVoe3GlaAo5zoSBDAEXORwUZhv6m+lCyxlsHCS3nqPUE+MKyZU71t8Q==
+
+ionicons@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/ionicons/-/ionicons-5.0.1.tgz#fb48475b042b04b3ed2ba9876800687917d4603d"
+  integrity sha512-P9GHr7pgCJcG211W0wute49NZ9AvJZvFJf4OwYybakjX6j7tu0q5t5HNWn9bcb9YjI7SxBblJg8iqQ1Yb59DXw==
+
 ip-regex@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/ip-regex/-/ip-regex-2.1.0.tgz#fa78bf5d2e6913c911ce9f819ee5146bb6d844e9"
@@ -7615,7 +7648,7 @@ ts-pnp@^1.1.6:
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.2.0.tgz#a500ad084b0798f1c3071af391e65912c86bca92"
   integrity sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==
 
-tslib@^1.9.0:
+tslib@^1.10.0, tslib@^1.9.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
   integrity sha512-i/6DQjL8Xf3be4K/E6Wgpekn5Qasl1usyw++dAA35Ue5orEn65VIxOA+YvNNl9HV3qv70T7CNwjODHZrLwvd1Q==
@@ -7928,6 +7961,11 @@ vue-loader@^15.9.2:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
+
+vue-router@^3.3.4:
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.3.4.tgz#4e38abc34a11c41b6c3d8244449a2e363ba6250b"
+  integrity sha512-SdKRBeoXUjaZ9R/8AyxsdTqkOfMcI5tWxPZOUX5Ie1BTL5rPSZ0O++pbiZCeYeythiZIdLEfkDiQPKIaWk5hDg==
 
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
   version "4.1.2"

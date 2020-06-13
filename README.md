@@ -1,4 +1,4 @@
-# workout-memory-2
+# Workout Memory 2
 
 ## Project setup
 ```
