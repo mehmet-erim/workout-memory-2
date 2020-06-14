@@ -26,14 +26,20 @@ export class DbService {
       if (!snapshot.val()) store.dispatch('setMovements', []);
 
       const value = snapshot.val();
-      const { movements } = value;
-      console.warn(movements['movement1']);
+      const { movements, workouts } = value;
 
       const movementsArr = Object.keys(movements).reduce(
-        (acc, key) => [...acc, { id: key, value: movements[key] }],
+        (acc, key) => [...acc, { key, value: movements[key] }],
         []
       );
+
+      const workoutsArr = Object.keys(workouts).reduce(
+        (acc, key) => [...acc, { key, ...workouts[key] }],
+        []
+      );
+
       store.dispatch('setMovements', movementsArr);
+      store.dispatch('setWorkouts', workoutsArr);
     });
   }
 
