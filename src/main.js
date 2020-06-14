@@ -6,13 +6,18 @@ import '@ionic/core/css/core.css';
 import '@ionic/core/css/ionic.bundle.css';
 import { addIcons } from 'ionicons';
 import { body, bicycle } from 'ionicons/icons';
-import { store } from './store.js';
+import { store } from './store';
 import { LazyLoadService } from './services/lazyLoadService.js';
+import { DbService } from './services/dbService.js';
 import * as fb from './firebaseConfig.js';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 Vue.use(Ionic);
+Vue.use(Loading, { color: '#3880ff' });
 Vue.config.productionTip = false;
 Vue.prototype.$lazyLoadService = new LazyLoadService();
+Vue.prototype.$dbService = new DbService();
 
 addIcons({
   'ios-body': body.ios,
