@@ -38,6 +38,7 @@ export default {
   },
   methods: {
     loginWithFacebook: async function() {
+      let loader = this.$loading.show();
       FB.login(
         (fbRes) => {
           if (fbRes.authResponse) {
@@ -53,7 +54,10 @@ export default {
               })
               .then(() => {
                 this.$router.push('workouts');
-              });
+              })
+              .finally(() => loader.hide());
+          } else {
+            loader.hide();
           }
         },
         { scope: 'email,public_profile' }
