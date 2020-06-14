@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import Movements from '../views/Movements.vue';
 import { IonicVueRouter } from '@ionic/vue';
 import Application from '../layouts/Application.vue';
+import firebase from 'firebase';
 
 Vue.use(IonicVueRouter);
 
@@ -17,7 +17,10 @@ const router = new IonicVueRouter({
         {
           path: '/movements',
           name: 'movements',
-          component: Movements,
+          component: () =>
+            import(
+              /* webpackChunkName: "movements" */ '../views/Movements.vue'
+            ),
         },
         {
           path: '/workouts',
@@ -37,8 +40,8 @@ const router = new IonicVueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = true;
-  if (to.name !== 'login' && !isAuthenticated) next({ name: 'login' });
+  if (to.name !== 'login' && !firebase.auth().currentUser)
+    next({ name: 'login' });
   else next();
 });
 
