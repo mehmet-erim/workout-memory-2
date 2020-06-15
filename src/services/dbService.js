@@ -4,6 +4,8 @@ import { store } from '../store';
 export class DbService {
   listeningUserId;
   collection;
+  movementsArr = [];
+  workoutsArr = [];
 
   constructor() {
     firebase.auth().onAuthStateChanged((user) => {
@@ -23,23 +25,25 @@ export class DbService {
     this.collection = firebase.database().ref(`users/${this.listeningUserId}`);
 
     this.collection.on('value', (snapshot) => {
-      if (!snapshot.val()) store.dispatch('setMovements', []);
+      if (!snapshot.val()) {
+        store.dispatch('setMovements', []);
+        store.dispatch('setWorkouts', []);
+        return;
+      }
 
       const value = snapshot.val();
       const { movements, workouts } = value;
 
-      const movementsArr = Object.keys(movements).reduce(
-        (acc, key) => [...acc, { key, value: movements[key] }],
-        []
-      );
+      this.movementsArr = Object.keys(movements)
+        .reduce((acc, key) => [...acc, { key, value: movements[key] }], [])
+        .sort(sortViaKey('movement'));
 
-      const workoutsArr = Object.keys(workouts).reduce(
-        (acc, key) => [...acc, { key, ...workouts[key] }],
-        []
-      );
+      this.workoutsArr = Object.keys(workouts)
+        .reduce((acc, key) => [...acc, { key, ...workouts[key] }], [])
+        .sort(sortViaKey('workout'));
 
-      store.dispatch('setMovements', movementsArr);
-      store.dispatch('setWorkouts', workoutsArr);
+      store.dispatch('setMovements', this.movementsArr);
+      store.dispatch('setWorkouts', this.workoutsArr);
     });
   }
 
@@ -48,4 +52,39 @@ export class DbService {
     this.collection.off('value');
     this.collection = null;
   }
+
+  addMovement(name) {
+    const newKey = getNewKey(this.movementsArr, 'movement');
+
+    return firebase
+      .database()
+      .ref(`users/${this.listeningUserId}/movements/${newKey}`)
+      .set(name);
+  }
+
+  updateMovement(movement) {
+    return firebase
+      .database()
+      .ref(`users/${this.listeningUserId}/movements/${movement.key}`)
+      .set(movement.value);
+  }
+
+  removeMovement(key) {
+    return firebase
+      .database()
+      .ref(`users/${this.listeningUserId}/movements/${key}`)
+      .remove();
+  }
+}
+
+function getNewKey(arr, prefix) {
+  if (!arr.length) return prefix + 1;
+  return prefix + (Number(arr[0].key.replace(prefix, '')) + 1);
+}
+
+function sortViaKey(prefix) {
+  return (a, b) =>
+    Number(a.key.replace(prefix, '')) > Number(b.key.replace(prefix, ''))
+      ? -1
+      : 0;
 }
