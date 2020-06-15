@@ -1,16 +1,11 @@
 <template>
   <ion-tabs>
-    <ion-tab tab="movements"> </ion-tab>
-    <ion-tab tab="workouts"> </ion-tab>
-
-    <ion-header translucent>
-      <ion-toolbar>
-        <ion-title>List</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content fullscreen>
-      <router-view />
-    </ion-content>
+    <ion-tab tab="movements">
+      <layout-header>Movements</layout-header>
+    </ion-tab>
+    <ion-tab tab="workouts">
+      <layout-header>Workouts</layout-header>
+    </ion-tab>
 
     <template slot="bottom">
       <ion-tab-bar>
@@ -26,3 +21,12 @@
     </template>
   </ion-tabs>
 </template>
+
+<script>
+import LayoutHeader from "../components/LayoutHeader.vue";
+export default {
+  components: {
+    "layout-header": LayoutHeader
+  }
+};
+</script>
