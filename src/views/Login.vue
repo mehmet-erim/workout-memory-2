@@ -15,32 +15,40 @@
 
 <script>
 /* eslint-disable no-undef */
-import firebase from 'firebase';
+import firebase from "firebase";
 
 export default {
-  name: 'login',
+  name: "login",
   mounted: function() {
     this.$lazyLoadService
       .loadScript({
-        src: 'https://connect.facebook.net/en_US/sdk.js',
-        id: 'facebook-jssdk',
+        src: "https://connect.facebook.net/en_US/sdk.js",
+        id: "facebook-jssdk"
       })
-      .then((loaded) => {
+      .then(loaded => {
         if (!loaded) return;
 
         FB.init({
-          appId: '812845172480383',
+          appId: "812845172480383",
           cookie: true,
           xfbml: true,
-          version: 'v7.0',
+          version: "v7.0"
         });
       });
   },
   methods: {
     loginWithFacebook: async function() {
-      let loader = this.$loading.show();
+      let loader;
+      this.$ionic.loadingController
+        .create({
+          message: "Loading"
+        })
+        .then(l => {
+          loader = l;
+          l.present();
+        });
       FB.login(
-        (fbRes) => {
+        fbRes => {
           if (fbRes.authResponse) {
             const credential = firebase.auth.FacebookAuthProvider.credential(
               fbRes.authResponse.accessToken
@@ -49,20 +57,20 @@ export default {
             firebase
               .auth()
               .signInWithCredential(credential)
-              .catch((error) => {
-                alert('An error occurred', error);
+              .catch(error => {
+                alert("An error occurred", error);
               })
               .then(() => {
-                this.$router.push('workouts');
+                this.$router.push("workouts");
               })
-              .finally(() => loader.hide());
+              .finally(() => loader.dismiss());
           } else {
-            loader.hide();
+            loader.dismiss();
           }
         },
-        { scope: 'email,public_profile' }
+        { scope: "email,public_profile" }
       );
-    },
-  },
+    }
+  }
 };
 </script>
