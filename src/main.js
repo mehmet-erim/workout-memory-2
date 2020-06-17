@@ -1,8 +1,17 @@
 import '@ionic/core/css/core.css';
 import '@ionic/core/css/ionic.bundle.css';
+import './assets/css/styles.css';
 import Ionic from '@ionic/vue';
 import { addIcons } from 'ionicons';
-import { bicycle, body, checkmark, add } from 'ionicons/icons';
+import {
+  bicycle,
+  body,
+  checkmark,
+  add,
+  trash,
+  arrowBack,
+  close,
+} from 'ionicons/icons';
 import Vue from 'vue';
 import App from './App.vue';
 import * as fb from './firebaseConfig.js';
@@ -25,6 +34,12 @@ addIcons({
   'md-checkmark': checkmark.md,
   'ios-add': add.ios,
   'md-add': add.md,
+  'ios-trash': trash.ios,
+  'md-trash': trash.md,
+  'ios-arrow-back': arrowBack.ios,
+  'md-arrow-back': arrowBack.md,
+  'ios-close': close.ios,
+  'md-close': close.md,
 });
 
 let app;
