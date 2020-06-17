@@ -7,16 +7,23 @@
           <ion-button size="small" shape="round" @click="save">
             <ion-icon name="checkmark"></ion-icon>
           </ion-button>
+          <ion-button
+            class="f-right"
+            color="dark"
+            fill="outline"
+            size="small"
+            shape="round"
+            @click="back"
+          >
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
         </ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
       <ion-item>
         <ion-label position="floating">Movement</ion-label>
-        <ion-input
-          :value="movement.value"
-          @ionInput="movement.value = $event.target.value"
-        ></ion-input>
+        <ion-input :value="movement.value" @ionInput="movement.value = $event.target.value"></ion-input>
       </ion-item>
     </ion-content>
   </div>
@@ -30,13 +37,13 @@ ion-button {
 
 <script>
 export default {
-  name: 'CreateUpdateMovement',
+  name: "CreateUpdateMovement",
   props: {
-    title: { type: String },
+    title: { type: String }
   },
   data() {
     return {
-      movement: {},
+      movement: {}
     };
   },
   mounted() {
@@ -47,9 +54,9 @@ export default {
       let loader;
       this.$ionic.loadingController
         .create({
-          message: 'Loading',
+          message: "Loading"
         })
-        .then((l) => {
+        .then(l => {
           loader = l;
           l.present();
         });
@@ -66,6 +73,9 @@ export default {
         this.$ionic.modalController.dismiss();
       });
     },
-  },
+    back() {
+      this.$ionic.modalController.dismiss();
+    }
+  }
 };
 </script>

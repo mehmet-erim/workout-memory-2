@@ -14,4 +14,4 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - run: yarn && yarn lint && yarn build
+      - run: yarn && yarn lint && cp -r src/firebaseConfig.js.sample src/firebaseConfig.js && yarn build
