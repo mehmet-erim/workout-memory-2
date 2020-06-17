@@ -99,7 +99,7 @@ import { mapGetters } from "vuex";
 
 export default {
   props: {
-    item: { type: Object, default: {} },
+    item: { type: Object },
     title: { type: String, default: "New" }
   },
   data() {

@@ -1,5 +1,6 @@
 <template>
-    <div>
+  <div>
+    <ion-list>
       <ion-item-sliding v-for="movement in movements" :key="movement.key">
         <ion-item>
           <ion-label>{{ movement.value }}</ion-label>
@@ -11,9 +12,9 @@
       </ion-item-sliding>
     </ion-list>
 
-      <ion-fab-button class="bottom-right" @click="openModal">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
+    <ion-fab-button class="bottom-right" @click="openModal">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
   </div>
 </template>
 

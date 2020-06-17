@@ -86,7 +86,7 @@ export default {
   name: "CreateUpdateWorkout",
   props: {
     title: { type: String },
-    item: { type: Object, default: {} }
+    item: { type: Object }
   },
   data() {
     return {
