@@ -38,11 +38,17 @@ export class DbService {
         .reduce((acc, key) => [...acc, { key, value: movements[key] }], [])
         .sort(sortViaKey('movement'));
 
-      this.workoutsArr = Object.keys(workouts)
-        .reduce((acc, key) => [...acc, { key, ...workouts[key] }], [])
-        .sort(sortViaKey('workout'));
+      this.workoutsArr = Object.keys(workouts).reduce(
+        (acc, key) => [...acc, { key, ...workouts[key] }],
+        []
+      );
 
-      store.dispatch('setMovements', this.movementsArr);
+      this.workoutsArr.sort(sortViaKey('workout'));
+
+      store.dispatch('setMovements', {
+        movements: this.movementsArr,
+        movementResponse: movements,
+      });
       store.dispatch('setWorkouts', this.workoutsArr);
     });
   }
@@ -75,6 +81,29 @@ export class DbService {
       .ref(`users/${this.listeningUserId}/movements/${key}`)
       .remove();
   }
+
+  addWorkout(workout) {
+    const newKey = getNewKey(this.workoutsArr, 'workout');
+
+    return firebase
+      .database()
+      .ref(`users/${this.listeningUserId}/workouts/${newKey}`)
+      .set(workout);
+  }
+
+  updateWorkout(workout) {
+    return firebase
+      .database()
+      .ref(`users/${this.listeningUserId}/workouts/${workout.key}`)
+      .set({ ...workout });
+  }
+
+  removeWorkout(key) {
+    return firebase
+      .database()
+      .ref(`users/${this.listeningUserId}/workouts/${key}`)
+      .remove();
+  }
 }
 
 function getNewKey(arr, prefix) {
@@ -84,7 +113,8 @@ function getNewKey(arr, prefix) {
 
 function sortViaKey(prefix) {
   return (a, b) =>
-    Number(a.key.replace(prefix, '')) > Number(b.key.replace(prefix, ''))
+    Number(a.key.valueOf().replace(prefix, '')) >
+    Number(b.key.valueOf().replace(prefix, ''))
       ? -1
-      : 0;
+      : 1;
 }
