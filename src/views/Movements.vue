@@ -11,11 +11,9 @@
       </ion-item-sliding>
     </ion-list>
 
-    <ion-fab vertical="bottom" horizontal="end" edge slot="fixed">
       <ion-fab-button class="bottom-right" @click="openModal">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
-    </ion-fab>
   </div>
 </template>
 
