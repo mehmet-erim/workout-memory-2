@@ -1,41 +1,32 @@
 <template>
-  <div>
-    <ion-list>
+    <div>
       <ion-item-sliding v-for="movement in movements" :key="movement.key">
         <ion-item>
           <ion-label>{{ movement.value }}</ion-label>
         </ion-item>
         <ion-item-options side="end">
           <ion-item-option @click="edit(movement)">Edit</ion-item-option>
-          <ion-item-option color="danger" @click="remove(movement)"
-            >Remove</ion-item-option
-          >
+          <ion-item-option color="danger" @click="remove(movement)">Remove</ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
 
-    <ion-fab-button @click="openModal">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
+    <ion-fab vertical="bottom" horizontal="end" edge slot="fixed">
+      <ion-fab-button class="bottom-right" @click="openModal">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
   </div>
 </template>
 
-<style>
-ion-fab-button {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-}
-</style>
-
 <script>
-import { mapGetters } from 'vuex';
-import CreateUpdateMovement from '../components/CreateUpdateMovement.vue';
+import { mapGetters } from "vuex";
+import CreateUpdateMovement from "../components/CreateUpdateMovement.vue";
 
 export default {
-  name: 'movements',
+  name: "movements",
   computed: {
-    ...mapGetters(['movements']),
+    ...mapGetters(["movements"])
   },
   methods: {
     edit(item) {
@@ -44,24 +35,24 @@ export default {
     remove(item) {
       this.$ionic.alertController
         .create({
-          cssClass: 'my-custom-class',
-          header: 'Are you sure?',
+          cssClass: "my-custom-class",
+          header: "Are you sure?",
           message: `<strong>${item.value}</strong> will be deleted!`,
           buttons: [
             {
-              text: 'Cancel',
-              role: 'cancel',
-              cssClass: 'secondary',
+              text: "Cancel",
+              role: "cancel",
+              cssClass: "secondary"
             },
             {
-              text: 'Yes',
+              text: "Yes",
               handler: () => {
                 this.$dbService.removeMovement(item.key);
-              },
-            },
-          ],
+              }
+            }
+          ]
         })
-        .then((a) => a.present());
+        .then(a => a.present());
     },
     openModal(movement) {
       return this.$ionic.modalController
@@ -69,15 +60,15 @@ export default {
           component: CreateUpdateMovement,
           componentProps: {
             data: {
-              movement,
+              movement
             },
             propsData: {
-              title: movement?.key ? `Edit - ${movement.value}` : 'New',
-            },
-          },
+              title: movement?.key ? `Edit - ${movement.value}` : "New"
+            }
+          }
         })
-        .then((m) => m.present());
-    },
-  },
+        .then(m => m.present());
+    }
+  }
 };
 </script>

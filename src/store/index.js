@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  state: { movements: [], workouts: [] },
+  state: { movements: [], workouts: [], movementResponse: {} },
   actions: {
     setMovements(context, payload) {
       context.commit('setMovements', payload);
@@ -15,7 +15,8 @@ export const store = new Vuex.Store({
   },
   mutations: {
     setMovements(state, payload) {
-      state.movements = payload;
+      state.movements = payload.movements;
+      state.movementResponse = payload.movementResponse;
     },
     setWorkouts(state, payload) {
       state.workouts = payload;
@@ -27,6 +28,9 @@ export const store = new Vuex.Store({
     },
     workouts(state) {
       return state.workouts;
+    },
+    movementResponse(state) {
+      return state.movementResponse;
     },
   },
 });
