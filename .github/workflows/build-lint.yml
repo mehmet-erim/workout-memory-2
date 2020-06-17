@@ -15,4 +15,3 @@ jobs:
         with:
           node-version: '12.x'
       - run: yarn && yarn lint && yarn build
-        working-directory: npm/ng-packs
