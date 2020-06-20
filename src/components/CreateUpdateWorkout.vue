@@ -80,6 +80,7 @@ ion-button.f-right {
 
 <script>
 import { mapGetters } from "vuex";
+import { uuid } from "../utils/uuid";
 import AddUpdateWorkoutElement from "./AddUpdateWorkoutElement.vue";
 
 export default {
@@ -163,7 +164,18 @@ export default {
       ];
     },
     onSubmitElement(element) {
-      this.workout.elements = [...this.workout.elements, element];
+      if (!element.id) {
+        this.workout.elements = [
+          ...this.workout.elements,
+          { ...element, id: uuid() }
+        ];
+      } else {
+        const index = this.workout.elements.findIndex(
+          el => el.id === element.id
+        );
+        this.workout.elements[index] = element;
+        this.workout.elements = [...this.workout.elements];
+      }
       this.isShowAddUpdateWorkoutElement = false;
     }
   },
